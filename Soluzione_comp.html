@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧮 Guida Risolutiva · Dall'Analisi alla Matematica</title>
+  <!-- Font divertente e leggibile -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- MathJax per equazioni LaTeX -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f9f0c1 0%, #fce6b4 100%);
+      background-attachment: fixed;
+      font-family: 'Quicksand', sans-serif;
+      padding: 30px 20px;
+      color: #2d3e50;
+      position: relative;
+    }
+
+    /* Pattern divertente: puntini e scarabocchi */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: radial-gradient(#ffb34720 2px, transparent 2px),
+                        radial-gradient(#5f9ea080 1px, transparent 1px);
+      background-size: 50px 50px, 80px 80px;
+      background-position: 0 0, 20px 30px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .main-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* CARD PRINCIPALE — stile block notes / quaderno */
+    .notebook {
+      background: #fffef7;
+      border-radius: 48px 48px 32px 32px;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1), 0 6px 10px rgba(0, 0, 0, 0.05), inset 0 2px 4px #ffffffcc;
+      padding: 40px 35px;
+      border: 3px solid #ffb882;
+      border-top: 18px solid #ffb882;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .notebook::after {
+      content: "✏️📐🧵";
+      position: absolute;
+      bottom: 15px; right: 30px;
+      font-size: 28px;
+      opacity: 0.2;
+      transform: rotate(-5deg);
+    }
+
+    /* nastrino decorativo */
+    .ribbon {
+      background: #ff8a5c;
+      color: white;
+      display: inline-block;
+      padding: 12px 28px;
+      font-weight: 700;
+      font-size: 1.9rem;
+      letter-spacing: -0.5px;
+      border-radius: 60px 20px 60px 20px;
+      box-shadow: 0 8px 0 #b1522f, 0 6px 12px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+      transform: rotate(-1deg);
+      border: 2px solid #fff9e6;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #1e3c4f;
+      margin-bottom: 10px;
+      line-height: 1.2;
+      text-shadow: 3px 3px 0 #ffe0a4;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 40px 0 15px 0;
+      padding-bottom: 10px;
+      border-bottom: 6px dotted #f7b05e;
+      display: inline-block;
+      color: #2a5775;
+      background: #fff1d2;
+      padding: 8px 24px 8px 18px;
+      border-radius: 40px 12px 40px 12px;
+      transform: rotate(-0.8deg);
+      box-shadow: 0 4px 0 #e09d5e;
+    }
+
+    h3 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin: 30px 0 15px;
+      color: #3c6e8c;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h3 i {
+      font-size: 1.9rem;
+    }
+
+    .pillar-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 25px 0 10px;
+    }
+
+    .pillar {
+      background: #cbe4de;
+      padding: 15px 22px;
+      border-radius: 40px 16px 40px 16px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1f4e5f;
+      border: 3px solid #619f9f;
+      box-shadow: 0 6px 0 #3a6b6b;
+      flex: 1 1 180px;
+      backdrop-filter: blur(2px);
+    }
+
+    .pillar span {
+      background: #fdc78a;
+      padding: 3px 12px;
+      border-radius: 30px;
+      margin-right: 8px;
+      color: #232323;
+    }
+
+    /* sezioni speciali: scheda tecnica, volantino */
+    .fun-fact {
+      background: #ffecb3;
+      border-left: 16px solid #ffaa5e;
+      padding: 22px 28px;
+      border-radius: 30px 60px 30px 60px;
+      margin: 30px 0;
+      box-shadow: 0 10px 0 #c47e44, 0 4px 10px rgba(0,0,0,0.05);
+      font-size: 1.1rem;
+    }
+
+    .volantino {
+      background: #ffe9ce;
+      border: 5px dashed #ff8a5c;
+      border-radius: 50px 20px 50px 20px;
+      padding: 20px 30px;
+      margin: 30px 0;
+      box-shadow: inset 0 0 0 5px #fff2db, 0 8px 0 #bf7f4a;
+      font-weight: 500;
+    }
+
+    .volantino h4 {
+      font-size: 1.8rem;
+      color: #a5421b;
+      display: flex;
+      gap: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffffd0;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 8px 0 #b0aa9a;
+      margin: 25px 0;
+    }
+
+    th {
+      background: #5f9ea0;
+      color: white;
+      padding: 14px 10px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-bottom: 4px solid #ffe194;
+    }
+
+    td {
+      padding: 12px 10px;
+      border-bottom: 2px solid #ffd89c;
+      font-weight: 500;
+    }
+
+    .equation-block {
+      background: #fef7e9;
+      padding: 18px 22px;
+      border-radius: 30px;
+      margin: 20px 0;
+      font-size: 1.3rem;
+      border: 3px solid #e3b37c;
+      box-shadow: inset 0 0 0 3px #ffffff, 0 7px 0 #bd8b57;
+      overflow-x: auto;
+    }
+
+    /* callout per consigli */
+    .expert-tip {
+      background: #a9d6e5;
+      padding: 20px 30px;
+      border-radius: 40px 10px 40px 10px;
+      border: 4px solid #014f86;
+      color: #012a36;
+      font-weight: 600;
+      margin-top: 35px;
+      box-shadow: 0 8px 0 #2c5f7a;
+    }
+
+    ul, ol {
+      padding-left: 30px;
+      margin: 15px 0;
+    }
+
+    li {
+      margin: 8px 0;
+      font-size: 1.15rem;
+    }
+
+    /* decorazioni */
+    .decor-icon {
+      font-size: 2.2rem;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .badge {
+      background: #ffeaa6;
+      padding: 4px 14px;
+      border-radius: 40px;
+      font-weight: 700;
+      border: 2px solid #cf9e4f;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 35px;
+      color: #4d3e2b;
+      font-weight: 600;
+    }
+
+    /* responsive */
+    @media (max-width: 600px) {
+      .notebook { padding: 25px 18px; }
+      h1 { font-size: 2rem; }
+      .ribbon { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="main-container">
+  <div class="notebook">
+    
+    <!-- Intestazione giocosa -->
+    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+      <span class="ribbon">🧩 LOGOS · ERMENEUTICA · ALGEBRA</span>
+      <span style="font-size: 2.5rem;">📚✨</span>
+    </div>
+    
+    <h1>Guida Risolutiva: <br>Dall'Analisi del Testo alla Soluzione Matematica</h1>
+    
+    <p style="font-size: 1.3rem; font-weight: 500; background: #fff3d3; padding: 15px 20px; border-radius: 50px 20px 50px 20px; margin-bottom: 10px;">
+      <span class="decor-icon">🔍</span> 
+      Saper trasformare un testo narrativo in un modello matematico è una delle competenze più elevate. 
+      Per voi, abituati a decodificare la complessità dei classici, la matematica non è arida manipolazione, ma 
+      <strong>logos e sintassi della realtà</strong>.
+    </p>
+
+    <!-- Tre pilastri -->
+    <div class="pillar-box">
+      <div class="pillar"><span>1️⃣</span> Estrazione dati & incognite</div>
+      <div class="pillar"><span>2️⃣</span> Traduzione in equazione</div>
+      <div class="pillar"><span>3️⃣</span> Verifica & coerenza</div>
+    </div>
+    <p style="font-style: italic; margin-top: 5px;">«Inizieremo applicando questo sguardo analitico alla gestione di un evento comunitario»</p>
+    
+    <!-- SEPARATORE -->
+    <div style="text-align: center; margin: 30px 0 10px; font-size: 2rem;">⚽🏆📊</div>
+    
+    <!-- CASO STUDIO 1 -->
+    <h2>📋 2. Caso Studio 1: Ottimizzazione Finanziaria del Torneo Scolastico</h2>
+    
+    <h3>🧮 Pilastro 1: Estrazione e Analisi dei Dati</h3>
+    <ul>
+      <li>Quota individuale: \(5\text{ €}\)</li>
+      <li>Spese fisse: \(60\text{ €}\)</li>
+      <li>Numero iscritti: variabile \(n\)</li>
+      <li>Premi: 3° classificato \(x\), 2° \(2x\), 1° \(4x\) → montepremi \(x+2x+4x = 7x\)</li>
+    </ul>
+    
+    <h3>📐 Pilastro 2: Traduzione in Equazione (Formula Unificata)</h3>
+    <div class="equation-block">
+      \[
+      x(n) = \frac{5n - 60}{7}
+      \]
+    </div>
+    
+    <h3>✅ Pilastro 3: Calcolo e Verifica (80 Iscritti)</h3>
+    <div class="equation-block">
+      \[
+      x = \frac{5 \cdot 80 - 60}{7} = \frac{400 - 60}{7} = \frac{340}{7} \approx 48,57\text{ €}
+      \]
+    </div>
+    <p><strong>Quindi:</strong> 🥉 \(48,57\text{ €}\) &nbsp;&nbsp; 🥈 \(97,14\text{ €}\) &nbsp;&nbsp; 🥇 \(194,28\text{ €}\) <br>
+    <span class="badge">arrotondamento alla seconda cifra decimale</span></p>
+    
+    <!-- VOLANTINO 100 ISCRITTI -->
+    <div class="volantino">
+      <h4>📢 Comunicazione Strategica · Volantino per 100 Iscritti</h4>
+      <p style="font-size:1.4rem; font-weight:700;">🏅 La gloria sportiva ha un nuovo valore!</p>
+      <p>Se raggiungiamo <strong>100 iscritti</strong>, montepremi totale: \(5 \cdot 100 - 60 = 440\text{ €}\)</p>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0;">
+        <div style="background:#ffd966; border-radius: 30px; padding: 12px 24px; font-weight: bold;">🥇 1° POSTO: ~ 251,43 €</div>
+        <div style="background:#c0c0c0; border-radius: 30px; padding: 12px 24px; font-weight: bold;">🥈 2° POSTO: ~ 125,71 €</div>
+        <div style="background:#cd7f32; border-radius: 30px; padding: 12px 24px; font-weight: bold; color:white;">🥉 3° POSTO: ~ 62,86 €</div>
+      </div>
+      <p>⚡ Iscriviti ora: trasforma il tuo talento in un successo condiviso!</p>
+    </div>
+    
+    <!-- CASO STUDIO 2 -->
+    <h2>🧵 3. Caso Studio 2: Progettazione Geometrica e Sartoriale</h2>
+    <p style="font-size:1.2rem;"><em>Dalla finanza alla geometria applicata al design.</em></p>
+    
+    <div style="background:#e2f0d9; padding:20px; border-radius:40px 20px; margin: 20px 0; border:3px solid #7da064;">
+      <p><strong>🔹 Analisi Tecnica:</strong> 10 strisce da \(25\text{ cm}\) ciascuna, sovrapposte orizzontalmente. Altezza finale \(150\text{ cm}\). <br>
+      <strong>🔹 Numero sovrapposizioni:</strong> \(10-1 = 9\) giunzioni.</p>
+      <p>Sia \(x\) la sovrapposizione in cm:</p>
+      <div class="equation-block" style="background: #d4e2c4;">
+        \[
+        10 \cdot 25 - 9x = 150
+        \]
+      </div>
+      <p>Risoluzione:</p>
+      <div class="equation-block" style="background: #d4e2c4;">
+        \[
+        250 - 9x = 150 \quad\Rightarrow\quad -9x = -100 \quad\Rightarrow\quad x = \frac{100}{9} \approx 11,11\text{ cm}
+        \]
+      </div>
+    </div>
+    
+    <!-- SCHEDA TECNICA -->
+    <div class="fun-fact">
+      <div style="display:flex; align-items:center; gap:15px;">
+        <span style="font-size:3rem;">📋✂️</span>
+        <span style="font-weight:800; font-size:1.8rem; color:#693f1d;">SCHEDA TECNICA PER IL LABORATORIO SARTORIALE</span>
+      </div>
+      <p><strong>Progetto:</strong> Confezione Tenda a Pacchetto (Effetto Chiaro-Scuro). <br>
+      <strong>Materiali:</strong> 10 strisce di tessuto, altezza \(25\text{ cm}\) ciascuna. <br>
+      <strong>Obiettivo Altezza Finale:</strong> \(150\text{ cm}\). <br>
+      <span style="background:#f5e3c1; padding:6px 16px; border-radius:30px; display:inline-block; margin-top:12px;">
+        ⚠️ Nota Operativa: sovrapposizione esatta di <strong>\(11,11\text{ cm}\)</strong> (frazione \(\frac{100}{9}\)).
+      </span>
+      </p>
+    </div>
+    
+    <!-- CASO STUDIO 3 -->
+    <h2>🏺 4. Caso Studio 3: L'Eredità di Diofanto – Enigma tra Storia e Algebra</h2>
+    <p style="font-weight:600;">“Diofanto d'Alessandria: il padre dell'algebra simbolica.”</p>
+    
+    <h3>📜 Traduzione Logica dell'Epitaffio</h3>
+    <table>
+      <tr><th>Fase della Vita (Testo)</th><th>Traduzione Algebrica</th></tr>
+      <tr><td>"Gli concesse di rimanere fanciullo un sesto della sua vita"</td><td>\(\frac{x}{6}\)</td></tr>
+      <tr><td>"Dopo un altro dodicesimo le sue guance videro la barba"</td><td>\(\frac{x}{12}\)</td></tr>
+      <tr><td>"Dopo un settimo egli accese la fiaccola del matrimonio"</td><td>\(\frac{x}{7}\)</td></tr>
+      <tr><td>"E dopo cinque anni gli nacque un figlio"</td><td>\(+5\)</td></tr>
+      <tr><td>"Il figlio... aveva raggiunto la metà degli anni di vita del padre"</td><td>\(\frac{x}{2}\)</td></tr>
+      <tr><td>"Quattro anni ancora... prima di raggiungere il termine"</td><td>\(+4\)</td></tr>
+    </table>
+    
+    <div class="equation-block">
+      \[
+      \frac{x}{6} + \frac{x}{12} + \frac{x}{7} + 5 + \frac{x}{2} + 4 = x
+      \]
+    </div>
+    <p>Sommiamo termini noti: \(5+4=9\)</p>
+    <div class="equation-block">
+      \[
+      \frac{x}{6} + \frac{x}{12} + \frac{x}{7} + \frac{x}{2} + 9 = x
+      \]
+    </div>
+    <p>Minimo comune multiplo \(84\):</p>
+    <div class="equation-block">
+      \[
+      \frac{14x + 7x + 12x + 42x}{84} + 9 = x \quad\Rightarrow\quad \frac{75x}{84} + 9 = x
+      \]
+    </div>
+    <p>Isoliamo \(x\):</p>
+    <div class="equation-block">
+      \[
+      9 = x - \frac{75x}{84} = \frac{9x}{84} \quad\Rightarrow\quad 1 = \frac{x}{84} \quad\Rightarrow\quad x = 84
+      \]
+    </div>
+    <div style="background:#ffd0b0; border-radius: 60px 20px; padding: 18px 25px; margin:20px 0; border:4px solid #af5f3c;">
+      <span style="font-size:2.2rem;">🏛️</span> 
+      <strong style="font-size:1.8rem;">Diofanto morì a 84 anni.</strong> 
+      <p>«L'enigma non è solo calcolo: è il momento in cui la narrazione umana incontra la precisione simbolica.»</p>
+    </div>
+    
+    <!-- CONCLUSIONI -->
+    <h2>🎓 5. Conclusioni e Revisione Metodologica</h2>
+    <p style="font-size:1.2rem;">Tre casi — economia, geometria tessile, storia matematica — dimostrano che il pensiero matematico è abilità trasversale. Non numeri, ma <strong>relazioni</strong>.</p>
+    
+    <div class="expert-tip">
+      <div style="display:flex; gap:20px; align-items:center;">
+        <span style="font-size:3.5rem;">🧠💡</span>
+        <span style="font-size:1.8rem; font-weight:800;">Consigli dell'Esperto per il Problem Solving</span>
+      </div>
+      <ul style="margin-top:20px;">
+        <li><strong>📖 Ermeneutica del Testo:</strong> Leggete tre volte. Senso → dati → incognita.</li>
+        <li><strong>🧮 Eleganza delle Frazioni:</strong> Mantenete \(\frac{100}{9}\) fino alla fine, evitate decimali prematuri.</li>
+        <li><strong>📏 Uniformità delle Misure:</strong> Mai sommare metri a centimetri.</li>
+        <li><strong>🔎 Test di Plausibilità:</strong> Se Diofanto fosse risultato 15 o 200 anni, la logica avrebbe segnalato l'errore.</li>
+      </ul>
+      <p style="margin-top:20px; font-size:1.3rem; background:#fff2b5; padding:8px 18px; border-radius: 40px;">
+        ✨ “La matematica deve sempre abitare la realtà con coerenza.”
+      </p>
+    </div>
+    
+    <!-- Firma decorativa -->
+    <div style="margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end;">
+      <div style="font-size:2rem;">📐📊📚</div>
+      <div style="font-weight:600; background: #f7d098; padding: 12px 30px; border-radius: 100px 30px;">
+        ⚡ Logos · Algebra · Bellezza
+      </div>
+    </div>
+    
+    <footer>
+      <span style="background: white; padding: 8px 20px; border-radius: 50px; border:2px solid #f3b37f;">🧑‍🏫 Guida interattiva — equazioni LaTeX & stile divertente</span>
+    </footer>
+  </div> <!-- fine notebook -->
+</div> <!-- fine main-container -->
+</body>
+</html>
