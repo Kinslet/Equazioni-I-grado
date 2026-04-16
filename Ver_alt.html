@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏛️ Verifica di Matematica · Dominio delle Equazioni · Stile Divertente</title>
+  <!-- Font giocosi ma leggibili: un tocco classico con personalità -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Quicksand:wght@400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <!-- MathJax per equazioni stile LaTeX -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #2e241b; /* sfondo scuro tipo legno antico */
+      background-image: radial-gradient(circle at 20% 30%, #4a3a2e 0%, #1f1812 100%);
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      font-family: 'Crimson Text', 'Times New Roman', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* pergamena centrale divertente */
+    .scroll-container {
+      max-width: 1200px;
+      width: 100%;
+      background: #fdf3da;
+      background: linear-gradient(145deg, #fef7e9 0%, #f6e9ce 100%);
+      border-radius: 32px 32px 24px 24px;
+      box-shadow: 0 30px 40px rgba(0,0,0,0.5), 0 0 0 2px #b89b7b, 0 0 0 6px #e7d5b7;
+      padding: 2.5rem 2.8rem;
+      position: relative;
+      border: 1px solid #c9aa7b;
+      transition: transform 0.2s ease;
+    }
+
+    /* decorazioni "colonne" ai lati (solo decorative, divertenti) */
+    .scroll-container::before,
+    .scroll-container::after {
+      content: "🏛️";
+      font-size: 2.8rem;
+      position: absolute;
+      top: 20px;
+      opacity: 0.2;
+      filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
+    }
+    .scroll-container::before { left: -10px; transform: rotate(-10deg); }
+    .scroll-container::after { right: -10px; transform: rotate(10deg); content: "📜"; }
+
+    /* nastrino superiore */
+    .ribbon {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #b22222;
+      color: #f9e7b3;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      padding: 0.4rem 2.8rem;
+      border-radius: 40px;
+      box-shadow: 0 6px 0 #5e0e0e, 0 8px 12px rgba(0,0,0,0.2);
+      text-transform: uppercase;
+      border: 1px solid #e6b422;
+      text-shadow: 2px 2px 0 #3a0606;
+      white-space: nowrap;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 2.8rem;
+      text-align: center;
+      color: #2c1e0e;
+      text-shadow: 4px 4px 0 #e7cfa1;
+      letter-spacing: 1px;
+      margin: 1.5rem 0 0.8rem;
+      word-break: break-word;
+      border-bottom: 4px double #b68b5c;
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      font-size: 1.9rem;
+      color: #3d2b14;
+      margin: 2rem 0 0.8rem;
+      border-left: 12px solid #b68b5c;
+      padding-left: 1.2rem;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    h2 i { font-size: 1.6rem; opacity: 0.8; }
+
+    h3 {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #4e3112;
+      margin: 1.5rem 0 0.5rem;
+      display: inline-block;
+      background: #e9d6b0;
+      padding: 0.2rem 1.4rem;
+      border-radius: 30px;
+      box-shadow: inset 0 1px 4px #fff3dd, 0 4px 0 #aa7e54;
+      letter-spacing: -0.3px;
+    }
+
+    .intro-box {
+      background: #e7d9bf;
+      padding: 1.5rem 2rem;
+      border-radius: 60px 20px 60px 20px;
+      border: 2px dashed #7a5a3a;
+      margin: 1.8rem 0;
+      box-shadow: inset 0 0 0 3px #fbf3e2, 0 10px 15px -8px rgba(0,0,0,0.3);
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: #1e150a;
+    }
+
+    .intro-box p {
+      margin-bottom: 1rem;
+    }
+    .intro-box p:last-child { margin-bottom: 0; }
+
+    /* stile per gli esercizi, come tavolette */
+    .esercizio-card {
+      background: #fcf5e6;
+      border-radius: 24px 8px 24px 8px;
+      padding: 1.5rem 2rem;
+      margin: 1.8rem 0;
+      border: 1px solid #c9aa7b;
+      box-shadow: 6px 6px 0 #a58357, 0 10px 20px rgba(0,0,0,0.1);
+      transition: all 0.15s;
+    }
+    .esercizio-card:hover {
+      box-shadow: 8px 8px 0 #8b693f, 0 12px 24px rgba(0,0,0,0.15);
+      transform: translate(-2px, -2px);
+    }
+
+    .list-equation {
+      list-style: none;
+      margin: 1.2rem 0;
+    }
+    .list-equation li {
+      font-size: 1.4rem;
+      margin: 1rem 0;
+      padding-left: 2rem;
+      position: relative;
+      font-weight: 500;
+    }
+    .list-equation li::before {
+      content: "✧";
+      color: #b34e1a;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      font-size: 1.8rem;
+    }
+
+    .consiglio {
+      background: #fff1d2;
+      padding: 0.8rem 1.5rem;
+      border-radius: 20px;
+      font-style: italic;
+      border-left: 8px solid #bb7e42;
+      margin: 1.2rem 0;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 500;
+    }
+
+    .soluzione-box {
+      background: #dac29e;
+      padding: 1.2rem 2rem;
+      border-radius: 30px 8px 30px 8px;
+      margin: 2rem 0 1rem;
+      color: #0a0703;
+      border: 2px solid #634f32;
+      box-shadow: inset 0 0 0 4px #f3e5d1, 0 6px 0 #5e452b;
+    }
+
+    .griglia {
+      background: #b1946e;
+      border-radius: 40px 12px 40px 12px;
+      padding: 1.8rem;
+      color: #fbf3e8;
+      text-shadow: 2px 2px 0 #2f210e;
+      font-weight: 600;
+      box-shadow: inset 0 2px 8px #ebd7b0, 0 10px 0 #4e3a22;
+    }
+    .griglia table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Quicksand', sans-serif;
+    }
+    .griglia th, .griglia td {
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid #ebc384;
+      text-align: left;
+    }
+    .griglia th {
+      font-size: 1.3rem;
+      background: #7b5d3c;
+      color: #fbeec9;
+    }
+
+    .footer-note {
+      margin-top: 2.8rem;
+      text-align: center;
+      font-size: 1.3rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: #2c1c06;
+      background: #e9cfaa;
+      display: inline-block;
+      padding: 0.5rem 2.5rem;
+      border-radius: 60px;
+      letter-spacing: 2px;
+      box-shadow: 0 4px 0 #7a5a3a;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+      display: table;
+    }
+
+    .math-block {
+      font-size: 1.3rem;
+      margin: 0.8rem 0;
+    }
+
+    hr {
+      border: none;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #b68b5c, #b68b5c, transparent);
+      margin: 2rem 0;
+    }
+
+    /* decorazioni extra */
+    .stampino {
+      font-size: 1rem;
+      background: #b34e1a;
+      color: #f7e2b1;
+      padding: 0.2rem 1rem;
+      border-radius: 20px;
+      display: inline-block;
+      transform: rotate(-2deg);
+      font-family: 'Quicksand', sans-serif;
+      font-weight: bold;
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 1rem; }
+      .scroll-container { padding: 2rem 1.2rem; }
+      h1 { font-size: 2rem; }
+      .ribbon { font-size: 0.9rem; padding: 0.3rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="scroll-container">
+  <div class="ribbon">🏺 Agorà della Logica 🏺</div>
+  
+  <h1>📐 Verifica di Matematica<br>Il Dominio delle Equazioni di Primo Grado</h1>
+
+  <!-- Introduzione strategica -->
+  <div class="intro-box">
+    <p><strong>1. Introduzione e Contesto Strategico</strong></p>
+    <p>Benvenuti nell'agorà della logica. Spesso si commette l'errore di considerare l'algebra come un'arida manipolazione di cifre, ma per chi frequenta il Liceo Classico, essa si rivela per ciò che è realmente: la forma più pura di retorica e sintassi. Risolvere un'equazione di primo grado non è diverso dall'analizzare un periodo di Tucidide o dal decifrare l'etimo di un termine arcaico. L'incognita \(x\) è la parola che manca per completare il senso della nostra "proposizione" matematica; i principi di equivalenza sono le leggi grammaticali che ci permettono di trasformarla senza tradirne il significato originario.</p>
+    <p>In questa prova, testeremo la vostra capacità di tradurre il pensiero astratto in simboli rigorosi. Non temete l'errore: ogni inciampo nel calcolo è solo una svista filologica che la revisione logica saprà correggere. Affrontate gli esercizi con la precisione di un esegeta e la curiosità di un filosofo. Dimostrate che la logica classica e quella matematica parlano, in fondo, la stessa lingua.</p>
+    <span class="stampino">📜 “Καὶ τὸ λογικὸν”</span>
+  </div>
+
+  <hr>
+
+  <!-- ESERCIZIO 1 -->
+  <h2>📯 2. Esercizio 1: L'Arte dell'Equivalenza <span style="font-size:1.2rem;">(40 punti)</span></h2>
+  <div class="esercizio-card">
+    <p style="font-size:1.3rem; margin-bottom:1rem;">Risolvi le seguenti equazioni negli insiemi numerici indicati. Per ogni passaggio, è fondamentale esplicitare l'uso dei principi di equivalenza, proprio come si giustificherebbe una scelta di traduzione in una versione di latino.</p>
+    <ul class="list-equation">
+      <li><strong>a)</strong> \(3x + 10 = 1\) &nbsp; da risolvere in \(\mathbb{N}\) (Numeri Naturali).</li>
+      <li><strong>b)</strong> \(2 - 4y = 5 + 2y\) &nbsp; da risolvere in \(\mathbb{Z}\) (Numeri Interi).</li>
+      <li><strong>c)</strong> \(\frac{t}{10} = \frac{t}{2} - \frac{2t}{5}\) &nbsp; da risolvere in \(\mathbb{Q}\) (Numeri Razionali).</li>
+      <li><strong>d)</strong> \(4 - \frac{w-2}{2} = \frac{3-w}{3}\) &nbsp; da risolvere in \(\mathbb{R}\) (Numeri Reali).</li>
+    </ul>
+    <div class="consiglio">
+      🏛️ <strong>Consiglio del Prof:</strong> Prestate estrema attenzione ai "confini" del dominio. Proprio come un verbo greco non può essere declinato secondo le regole latine, una soluzione numericamente esatta potrebbe essere inaccettabile se non appartiene all'insieme richiesto.
+    </div>
+  </div>
+
+  <!-- ESERCIZIO 2 -->
+  <h2>📊 3. Esercizio 2: Percentuali e Numeri Razionali <span style="font-size:1.2rem;">(10 punti)</span></h2>
+  <div class="esercizio-card">
+    <p>L'algebra è lo strumento principe per interpretare i rapporti quantitativi della realtà. Risolvete il seguente enigma:</p>
+    <p style="font-weight:600; margin: 0.8rem 0;">🔍 <em>Problema:</em> Sommando a un numero razionale incognito il suo \(25\%\), si ottiene come risultato \(40\). Calcola, se esiste, tale numero.</p>
+    <p class="consiglio">📝 <strong>Nota Metodologica:</strong> Ricordate che il \(25\%\) di \(x\) rappresenta una "frazione di forza" del numero stesso (\(\frac{25}{100}x\)). Esprimete il risultato finale con la precisione di una glossa critica.</p>
+  </div>
+
+  <!-- ESERCIZIO 3 -->
+  <h2>⚛️ 4. Esercizio 3: Formule Letterali e Manipolazione Variabili <span style="font-size:1.2rem;">(15 punti)</span></h2>
+  <div class="esercizio-card">
+    <p>In fisica, le formule sono relazioni sintattiche tra grandezze. Data la seguente formula fittizia (ma rigorosa):</p>
+    <div class="math-block" style="text-align:center;">\[ U = -2 \cdot \frac{m}{r} \]</div>
+    <p>Esegui le seguenti operazioni di "isolamento della variabile":</p>
+    <ul style="margin-left: 2rem; font-size:1.2rem;">
+      <li><strong>a)</strong> Determina il valore di \(U\) nell'ipotesi in cui \(m\) sia uguale a \(r\) (\(m = r\)).</li>
+      <li><strong>b)</strong> Ricava il valore di \(m\) sapendo che \(U = 7\) e \(r = 5\).</li>
+      <li><strong>c)</strong> Determina il valore di \(r\) nell'ipotesi particolare in cui \(U\) sia esattamente il doppio di \(m\) (\(U = 2m\)).</li>
+    </ul>
+  </div>
+
+  <!-- ESERCIZIO 4 -->
+  <h2>🪙 5. Esercizio 4: Logica Applicata e Problemi Monetari <span style="font-size:1.2rem;">(15 punti)</span></h2>
+  <div class="esercizio-card">
+    <p>Immaginiamo una transazione nel foro: avete una banconota da \(10\ €\) e desiderate cambiarla in monete di piccolo taglio per un'offerta.</p>
+    <p style="background:#e3c9a0; padding:1rem; border-radius:20px;"><strong>Quesito:</strong> È matematicamente possibile cambiare \(10\ €\) utilizzando <em>esattamente lo stesso numero</em> di monete da \(5\) centesimi, da \(10\) centesimi e da \(20\) centesimi?<br>
+    Dimostrate la fattibilità (o l'impossibilità) dell'operazione impostando un'equazione lineare e verificando la natura della soluzione ottenuta.</p>
+  </div>
+
+  <!-- ESERCIZIO 5 -->
+  <h2>🎭 6. Esercizio 5: L'Enigma del Parametro \(k\) <span style="font-size:1.2rem;">(20 punti)</span></h2>
+  <div class="esercizio-card">
+    <p>Eleviamo la nostra indagine al livello dell'astrazione parametrica. Considera la seguente equazione nell'incognita \(x\):</p>
+    <div class="math-block" style="text-align:center;">\[ 4x + 3k = k + \frac{4}{3}x \]</div>
+    <p><strong>Richiesta:</strong> Calcola quale valore deve assumere il parametro \(k\) affinché l'equazione sia soddisfatta esattamente dal valore \(x = \frac{1}{2}\).</p>
+    <div class="consiglio">🧠 <strong>Consiglio del Prof:</strong> In questo scenario, la \(x\) non è l'incognita, ma un dato di fatto. Trattate \(k\) come l'unica vera variabile da scovare, invertendo i ruoli dei protagonisti sulla scena algebrica.</div>
+  </div>
+
+  <!-- SOLUZIONI COMMENTATE -->
+  <h2>📖 7. Soluzioni Commentate e Guida alla Risoluzione</h2>
+  <div class="soluzione-box">
+    <h3 style="background:none; box-shadow:none; padding-left:0;">🔎 Esercizio 1: Tutorial Passo-Passo</h3>
+    <ul style="list-style-type: '🏺 '; line-height:1.8; font-size:1.15rem;">
+      <li><strong>a)</strong> \(3x + 10 = 1\). Per il Primo Principio, sottraiamo \(10\) da entrambi i membri: \(3x = 1 - 10 \rightarrow 3x = -9\). Per il Secondo Principio, dividiamo per \(3\): \(x = -3\). <br> <span style="background:#f3d9b1;">Soluzione: Impossibile in \(\mathbb{N}\), poiché \(-3\) non è un numero naturale.</span> È come cercare un neutro plurale in una declinazione che prevede solo il maschile.</li>
+      <li><strong>b)</strong> \(2 - 4y = 5 + 2y\). Raggruppiamo: \(-4y - 2y = 5 - 2 \rightarrow -6y = 3\). Dividendo per \(-6\): \(y = -\frac{3}{6} = -\frac{1}{2}\). <br> Soluzione: Impossibile in \(\mathbb{Z}\), poiché \(-\frac{1}{2}\) è frazionario.</li>
+      <li><strong>c)</strong> \(\frac{t}{10} = \frac{t}{2} - \frac{2t}{5}\). Moltiplichiamo per m.c.m. \(10\): \(t = 5t - 4t \rightarrow t = t\). <br> Soluzione: Identità in \(\mathbb{Q}\). Ogni \(t\) è soluzione (tautologia).</li>
+      <li><strong>d)</strong> \(4 - \frac{w-2}{2} = \frac{3-w}{3}\). m.c.m. \(6\): \(24 - 3(w-2) = 2(3-w)\). Sviluppo: \(24 -3w +6 = 6 -2w \rightarrow 30 -3w = 6 -2w\). Portiamo: \(-3w+2w = 6-30 \rightarrow -w = -24 \rightarrow w = 24\). Soluzione reale accettabile.</li>
+    </ul>
+
+    <h3 style="margin-top:2rem;">🧮 Esercizio 2</h3>
+    <p>Traduciamo: \(x + \frac{1}{4}x = 40 \rightarrow \frac{5}{4}x = 40 \rightarrow x = 40 \cdot \frac{4}{5} = 32\). <br> <strong>Risultato:</strong> \(32\).</p>
+
+    <h3>⚡ Esercizio 3</h3>
+    <ul style="list-style-type:'✦ ';">
+      <li><strong>a)</strong> Se \(m = r\), \(\frac{m}{r}=1 \Rightarrow U = -2 \cdot 1 = \mathbf{-2}\).</li>
+      <li><strong>b)</strong> \(7 = -2 \cdot \frac{m}{5} \rightarrow 35 = -2m \rightarrow m = -\frac{35}{2} = \mathbf{-17,5}\). (Nota: calcolo rigoroso secondo la formula).</li>
+      <li><strong>c)</strong> \(U = 2m \Rightarrow 2m = -2 \cdot \frac{m}{r}\). Dividendo per \(2m\) (con \(m \neq 0\)): \(1 = -\frac{1}{r} \rightarrow \mathbf{r = -1}\).</li>
+    </ul>
+
+    <h3>💰 Esercizio 4</h3>
+    <p>Sia \(x\) il numero (identico) di monete per taglio. In centesimi: \(5x + 10x + 20x = 1000\) (10€ = 1000 cent). \(35x = 1000 \rightarrow x = \frac{1000}{35} = \frac{200}{7} \approx 28,57\). <br> <strong>Risultato:</strong> No, non è possibile: il numero di monete deve essere intero, ma la soluzione è frazionaria.</p>
+
+    <h3>🎯 Esercizio 5</h3>
+    <p>Sostituiamo \(x = \frac{1}{2}\): \(4\left(\frac{1}{2}\right) + 3k = k + \frac{4}{3}\left(\frac{1}{2}\right) \rightarrow 2 + 3k = k + \frac{2}{3}\).<br>
+    \(3k - k = \frac{2}{3} - 2 \rightarrow 2k = -\frac{4}{3} \rightarrow k = -\frac{2}{3}\). <br> <strong>Risultato:</strong> \(k = -\frac{2}{3}\).</p>
+  </div>
+
+  <!-- GRIGLIA VALUTAZIONE -->
+  <h2>📋 8. Griglia di Valutazione e Autovalutazione</h2>
+  <div class="griglia">
+    <table>
+      <thead><tr><th>Punteggio Totale</th><th>Giudizio Qualitativo</th><th>Feedback del Docente</th></tr></thead>
+      <tbody>
+        <tr><td>91 – 100</td><td>Ottimo</td><td>Eccellente capacità di sintesi logica e rigore formale.</td></tr>
+        <tr><td>71 – 90</td><td>Buono</td><td>Padronanza del metodo, con qualche lieve imprecisione nel calcolo.</td></tr>
+        <tr><td>51 – 70</td><td>Sufficiente</td><td>La struttura regge, ma la "grammatica" algebrica necessita di più esercizio.</td></tr>
+        <tr><td>0 – 50</td><td>Insufficiente</td><td>Fondamenta logiche da rivedere. Non temere: l'errore è il primo passo verso la conoscenza.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Nota finale spiritosa -->
+  <div class="footer-note">
+    ⚡ Per aspera ad astra! ⚡ <br>
+    <span style="font-size:1rem; font-family:'Quicksand';">«La matematica non è una punizione, ma un'estensione del vostro ragionare.»</span>
+  </div>
+
+  <!-- piccolo easter egg decorativo -->
+  <div style="margin-top: 1rem; text-align: right; opacity:0.7; font-style:italic;">
+    <span>📜 A cura del Sommo Algebrista · Liceo Classico "Euclide Pitagorico"</span>
+  </div>
+</div>
+</body>
+</html>
